@@ -13,7 +13,7 @@ endif
 CFLAGS  += $(shell cups-config --cflags)
 CFLAGS  += -lm				# link math.h
 CFLAGS  += -Wall			# enable all compiler warning messages
-CFLAGS  += -Wno-deprecated-declarations	# do not warn about deprecated CUPS api
+CFLAGS  += -Wno-deprecated-declarations	-Wall -Wextra --std=c99 -O2 # do not warn about deprecated CUPS api
 
 LDFLAGS += $(shell cups-config --ldflags)
 LDLIBS  += $(shell cups-config --image --libs)

@@ -2,6 +2,7 @@
 EXEC        = rastertotpcl
 CUPSDIR     = $(shell cups-config --serverbin)
 CUPSDATADIR = $(shell cups-config --datadir)
+PPDPATH=/usr/share/ppd
 
 # MacOS system integrity protection prevents us from writing to $(cups-config --datadir)
 # As a fallback, we copy the PPDs to $(cups-config --serverroot)/ppd
@@ -30,13 +31,10 @@ ppd:
 
 install:
 	install -s $(EXEC) $(CUPSDIR)/filter/
-ifeq ($(UNAME_S),Darwin)
-	if test ! -d $(CUPSDATADIR)/ppd/$(EXEC); then mkdir $(CUPSDATADIR)/ppd/$(EXEC); fi
-	install -m 644 ppd/* $(CUPSDATADIR)/ppd/$(EXEC)
-else
 	install -m 644 tectpcl2.drv $(CUPSDATADIR)/drv/
 	install -m 644 labelmedia.h $(CUPSDATADIR)/ppdc/
-endif
+	cp ppd/* $(PPDPATH)/
+
 
 
 uninstall:

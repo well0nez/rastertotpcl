@@ -23,7 +23,7 @@ all: rastertotpcl ppd
 .PHONY: all ppd install uninstall clean
 
 rastertotpcl:
-	gcc $(CFLAGS) $(LDFLAGS) $(LDLIBS) rastertotpcl.c -o $(EXEC)
+	gcc -Wall -Wextra --std=c99 -O2 -lm rastertotpcl.c -o rastertotpcl -lcupsimage -lcups
 
 ppd:
 	ppdc tectpcl2.drv
